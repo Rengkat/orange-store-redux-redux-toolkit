@@ -9,8 +9,10 @@ import {
   Text,
   Center,
 } from "@chakra-ui/react";
+import { usegetFetchProductsQuery } from "../../api";
 
 const Shop = () => {
+  const { data, error, isLoading, isSuccess } = usegetFetchProductsQuery();
   const [products, setProducts] = useState([]);
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -19,34 +21,37 @@ const Shop = () => {
   }, []);
   console.log(products);
   return (
-    <Box w={"90%"} mx="auto" my={10}>
-      <Grid templateColumns="repeat(4, 1fr)" gap={5}>
-        {products.map((product) => {
-          return (
-            <GridItem style={{ border: "solid black 1px" }} rounded="lg">
-              <Flex justifyContent="center" alignItems="center">
-                <Image
-                  src={product.image}
-                  boxSize="200px"
-                  objectFit="contain"
-                />
-              </Flex>
-              <Center w={"60%"} mx="auto" my={2} fontStyle="bold">
-                <Text>{product.title}</Text>
-              </Center>
-              <Center w={"60%"} mx="auto" my={2}>
-                <Text>${product.price}</Text>
-              </Center>
-              <Flex justifyContent="center" alignItems="center" pb={10}>
-                <Button w="60%" bg="brand.100" color="white">
-                  Add to Cart
-                </Button>
-              </Flex>
-            </GridItem>
-          );
-        })}
-      </Grid>
-    </Box>
+    <>
+      <Box w={"90%"} mx="auto" my={10} pos="absolute" left={0} right={0}>
+        <Grid templateColumns="repeat(4, 1fr)" gap={5}>
+          {products.map((product) => {
+            return (
+              <GridItem style={{ border: "solid black 0.5px" }} rounded="lg">
+                <Flex justifyContent="center" alignItems="center">
+                  <Image
+                    src={product.image}
+                    boxSize="200px"
+                    objectFit="contain"
+                  />
+                </Flex>
+                <Center w={"60%"} mx="auto" my={2} fontStyle="bold">
+                  <Text>{product.title}</Text>
+                </Center>
+                <Center w={"60%"} mx="auto" my={2}>
+                  <Text>${product.price}</Text>
+                </Center>
+                <Flex justifyContent="center" alignItems="center" pb={10}>
+                  <Button w="60%" bg="brand.100" color="white">
+                    Add to Cart
+                  </Button>
+                </Flex>
+              </GridItem>
+            );
+          })}
+        </Grid>
+      </Box>
+      {/* <Box bg="brand.100" h="20vh" pos="absolute" bottom={0} right0></Box> */}
+    </>
   );
 };
 
