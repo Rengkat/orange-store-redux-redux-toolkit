@@ -1,13 +1,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-const url = "https://fakestoreapi.com/products";
+const url = "https://fakestoreapi.com";
 export const storeApi = createApi({
-  reducerPath: "storeApi",
+  reducerPath: "fetchApi",
   baseQuery: fetchBaseQuery({ baseUrl: url }),
   endpoints: (builder) => ({
     getFetchProducts: builder.query({
-      query: () => `store/`,
+      query: () => "/products",
+    }),
+    getSingleProduct: builder.query({
+      query: (id) => `/products/${id}`,
     }),
   }),
 });
 
-export const { usegetFetchProductsQuery } = storeApi;
+export const { useGetFetchProductsQuery, useGetSingleProductQuery } = storeApi;

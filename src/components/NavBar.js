@@ -37,7 +37,7 @@ const NavBar = () => {
             <Text fontSize={20}>10</Text>
           </Flex>
         </Box>
-        <Cart />
+        {/* <Cart /> */}
       </Flex>
     </Box>
   );

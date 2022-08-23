@@ -12,6 +12,8 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { addToCart } from "../app/feature/storeSlice";
+import { useSelector, useDispatch } from "react-redux";
 const cart = [
   {
     category: "men's clothing",
@@ -35,9 +37,12 @@ const cart = [
   },
 ];
 const Cart = () => {
+  // const { addToCart } = useSelector((store) => store.cart);
+  const meet = useSelector((store) => store);
+  console.log(meet);
   return (
     <Box
-      w="28%"
+      w={{ sm: "80%", md: "50%", lg: "28%" }}
       bg="white"
       position="absolute"
       right={3}
@@ -59,9 +64,9 @@ const Cart = () => {
           <Button>Clear Cart</Button>
         </Flex>
       </Center>
-      {cart.map((product) => {
+      {cart.map((product, index) => {
         return (
-          <Flex justify="space-between" flexDirection="row" p={5}>
+          <Flex key={index} justify="space-between" flexDirection="row" p={5}>
             <Box>
               <Image
                 src={product.image}

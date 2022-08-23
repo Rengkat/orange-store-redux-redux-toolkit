@@ -1,12 +1,20 @@
-import NavBar from "./app/feature/components/NavBar";
-import Shop from "./app/feature/components/Shop";
+import NavBar from "./components/NavBar";
+import Shop from "./components/Shop";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SingleProduct from "./components/SingleProduct";
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <Shop />
-    </div>
+    <>
+      <Router>
+        <NavBar />
+        {/* <Shop /> */}
+        <Routes>
+          <Route exact path="/" element={<Shop />} />
+          <Route path="cart/:productId" element={<SingleProduct />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
