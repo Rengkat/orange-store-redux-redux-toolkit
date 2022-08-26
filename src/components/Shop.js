@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import {
   Grid,
   Box,
@@ -12,9 +11,24 @@ import {
 import { useGetFetchProductsQuery } from "../app/api";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
+import { addToCart, cartId } from "../app/feature/storeSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const Shop = () => {
   const { data, isFetching, isError, isSuccess } = useGetFetchProductsQuery();
+  const dispatch = useDispatch();
+  const { cart, idArray } = useSelector((store) => store.cart);
+
+  const shopId = data.map((prod) => prod.id);
+  const contains = shopId.some((element) => {
+    return idArray.includes(element);
+  });
+  console.log(contains);
+
+  const handleAddToCart = (product, id) => {
+    dispatch(addToCart(product));
+    dispatch(cartId(id));
+  };
 
   return (
     <>
@@ -31,7 +45,7 @@ const Shop = () => {
               xl: "repeat(4, 1fr)",
             }}
             gap={5}>
-            {data?.map((product, index) => {
+            {data?.map((product) => {
               return (
                 <GridItem
                   key={product.id}
@@ -53,8 +67,13 @@ const Shop = () => {
                     <Text>${product.price}</Text>
                   </Center>
                   <Flex justifyContent="center" alignItems="center" pb={10}>
-                    <Button w="60%" bg="brand.100" color="white">
-                      Add to Cart
+                    <Button
+                      _hover={{ bg: "brand.900" }}
+                      onClick={() => handleAddToCart(product, product.id)}
+                      w="60%"
+                      bg="brand.100"
+                      color="white">
+                      {contains ? "In the Cart" : "Add to Cart"}
                     </Button>
                   </Flex>
                 </GridItem>

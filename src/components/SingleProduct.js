@@ -1,17 +1,12 @@
-import {
-  Button,
-  Box,
-  Image,
-  Flex,
-  Center,
-  Text,
-  Heading,
-} from "@chakra-ui/react";
+import { Button, Box, Image, Flex, Text, Heading } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import { useGetSingleProductQuery } from "../app/api";
 import Loading from "./Loading";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../app/feature/storeSlice";
 
 const SingleProduct = () => {
+  const dispatch = useDispatch();
   const { productId } = useParams();
   const {
     data: product,
@@ -20,7 +15,9 @@ const SingleProduct = () => {
     isError,
     isSuccess,
   } = useGetSingleProductQuery(productId);
-  // const { image, price, description, category, rating, title } = product;
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
   return (
     <Box mt={5}>
       {isLoading ? (
@@ -47,15 +44,18 @@ const SingleProduct = () => {
               {product?.title}
             </Heading>
             <Heading size="md">${product?.price}</Heading>
-            <Text textTransform="capitalize">{product?.category} Category</Text>
+            <Text>{product?.category} Category</Text>
             <Text>({product?.rating.count}) Comments</Text>
             <Text>{product?.description}</Text>
             <Flex justify="space-between" my={5} w={{ base: "90%", md: "50%" }}>
-              <Button bg="brand.100" color="white">
+              <Button
+                onClick={() => handleAddToCart(product)}
+                bg="brand.100"
+                color="white">
                 Add to Cart
               </Button>
               <Button bg="brand.100" color="white">
-                <Link to={"/"}>Back to Shopping</Link>
+                <Link to="/">Back to Shopping</Link>
               </Button>
             </Flex>
           </Box>

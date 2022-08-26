@@ -1,7 +1,5 @@
 import {
-  Grid,
   Box,
-  GridItem,
   Image,
   Button,
   Flex,
@@ -12,40 +10,23 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { addToCart } from "../app/feature/storeSlice";
+import { clearCart, removeProduct } from "../app/feature/storeSlice";
 import { useSelector, useDispatch } from "react-redux";
-const cart = [
-  {
-    category: "men's clothing",
-    description:
-      "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-    id: 1,
-    image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-    price: 109.95,
-    rating: { rate: 3.9, count: 120 },
-    title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-  },
-  {
-    category: "men's clothing",
-    description:
-      "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
-    id: 3,
-    image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-    price: 55.99,
-    rating: { rate: 4.7, count: 500 },
-    title: "Mens Cotton Jacket",
-  },
-];
+
 const Cart = () => {
-  // const { addToCart } = useSelector((store) => store.cart);
-  const meet = useSelector((store) => store);
-  console.log(meet);
+  const dispatch = useDispatch();
+  const { cart } = useSelector((store) => store.cart);
+  const handleClear = () => {
+    dispatch(clearCart());
+  };
+
+  console.log(cart);
   return (
     <Box
-      w={{ sm: "80%", md: "50%", lg: "28%" }}
+      w={{ sm: "80%", md: "50%", lg: "30%" }}
       bg="white"
       position="absolute"
-      right={3}
+      right={2}
       top="60%"
       border="1px grey solid"
       boxShadow="md"
@@ -61,12 +42,21 @@ const Cart = () => {
           <Heading as="h5" size="lg">
             Cart
           </Heading>
-          <Button>Clear Cart</Button>
+          <Button onClick={handleClear}>Clear Cart</Button>
         </Flex>
       </Center>
-      {cart.map((product, index) => {
+      {cart.length === 0 && (
+        <Heading as="h3" size="md" py={5}>
+          <Center>Your cart is empty</Center>
+        </Heading>
+      )}
+      {cart.map((product) => {
         return (
-          <Flex key={index} justify="space-between" flexDirection="row" p={5}>
+          <Flex
+            key={product.id}
+            justify="space-between"
+            flexDirection="row"
+            p={5}>
             <Box>
               <Image
                 src={product.image}
@@ -84,7 +74,7 @@ const Cart = () => {
             <Box p={3}>
               <Text>$635</Text>
             </Box>
-            <IconButton>
+            <IconButton onClick={() => dispatch(removeProduct(product.id))}>
               <Icon color="gray" as={DeleteIcon} />
             </IconButton>
           </Flex>

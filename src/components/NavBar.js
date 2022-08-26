@@ -9,11 +9,11 @@ const NavBar = () => {
       <Flex
         w="80%"
         h="20vh"
-        mx={"auto"}
+        mx="auto"
         justifyContent="space-between"
         align="center">
         <Box>
-          <Heading as="h1" size="2xl" color="white" fontFamily={"Arial"}>
+          <Heading as="h1" size="2xl" color="white" fontFamily="Arial">
             Fake Store
           </Heading>
         </Box>
@@ -37,7 +37,7 @@ const NavBar = () => {
             <Text fontSize={20}>10</Text>
           </Flex>
         </Box>
-        {/* <Cart /> */}
+        <Cart />
       </Flex>
     </Box>
   );
