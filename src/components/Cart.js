@@ -40,7 +40,7 @@ const Cart = () => {
   // console.log(cart);
   return (
     <Box
-      w={{ sm: "80%", md: "50%", lg: "30%" }}
+      w={{ base: "95%", sm: "80%", md: "50%", lg: "30%" }}
       bg="white"
       position="absolute"
       opacity={isOpen ? "1" : "0"}
