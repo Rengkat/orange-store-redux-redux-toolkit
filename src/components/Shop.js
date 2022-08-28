@@ -19,11 +19,11 @@ const Shop = () => {
   const dispatch = useDispatch();
   const { cart, idArray } = useSelector((store) => store.cart);
 
-  const shopId = data.map((prod) => prod.id);
-  const contains = shopId.some((element) => {
-    return idArray.includes(element);
-  });
-  console.log(contains);
+  // const shopId = data.map((prod) => prod.id);
+  // const contains = shopId.some((element) => {
+  //   return idArray.includes(element);
+  // });
+  // console.log(contains);
 
   const handleAddToCart = (product, id) => {
     dispatch(addToCart(product));
@@ -73,7 +73,7 @@ const Shop = () => {
                       w="60%"
                       bg="brand.100"
                       color="white">
-                      {contains ? "In the Cart" : "Add to Cart"}
+                      Add to Cart
                     </Button>
                   </Flex>
                 </GridItem>
