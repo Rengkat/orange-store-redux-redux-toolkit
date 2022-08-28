@@ -23,7 +23,6 @@ const Shop = () => {
   // const contains = shopId.some((element) => {
   //   return idArray.includes(element);
   // });
-  // console.log(contains);
 
   const handleAddToCart = (product, id) => {
     dispatch(addToCart(product));
@@ -35,7 +34,14 @@ const Shop = () => {
       {isFetching ? (
         <Loading />
       ) : (
-        <Box w={"90%"} mx="auto" my={10} pos="absolute" left={0} right={0}>
+        <Box
+          overflow="hidden"
+          w={"90%"}
+          mx="auto"
+          my={10}
+          pos="absolute"
+          left={0}
+          right={0}>
           <Grid
             templateColumns={{
               // bas: "1fr",

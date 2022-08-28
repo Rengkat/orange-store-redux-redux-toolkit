@@ -1,11 +1,19 @@
+import { useSelector, useDispatch } from "react-redux";
 import { Box, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import Cart from "./Cart";
-// import { FaShoppingCart } from "react-icons/fa";
+
+import { openCart } from "../app/feature/storeSlice";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+  const { isOpen, cart } = useSelector((store) => store.cart);
+  const handleClick = () => {
+    dispatch(openCart());
+    console.log(isOpen, cart);
+  };
   return (
-    <Box bg="brand.100">
+    <Box bg="brand.100" overflow="hidden">
       <Flex
         w="80%"
         h="20vh"
@@ -17,7 +25,7 @@ const NavBar = () => {
             Fake Store
           </Heading>
         </Box>
-        <Box position="relative">
+        <Box onClick={handleClick} position="relative" cursor="pointer">
           <Icon
             fontSize={35}
             cursor="pointer"
@@ -34,7 +42,7 @@ const NavBar = () => {
             align="center"
             justify="center"
             rounded="md">
-            <Text fontSize={20}>10</Text>
+            <Text fontSize={20}>{cart.length}</Text>
           </Flex>
         </Box>
         <Cart />

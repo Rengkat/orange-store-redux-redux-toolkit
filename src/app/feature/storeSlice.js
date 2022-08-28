@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  // products: [],
   cart: [],
   idArray: [],
+  isOpen: false,
 };
 
 const shopSlice = createSlice({
@@ -47,6 +47,9 @@ const shopSlice = createSlice({
         state.cart = temPro;
       }
     },
+    openCart(state) {
+      state.isOpen = !state.isOpen;
+    },
   },
 });
 
@@ -58,4 +61,5 @@ export const {
   cartId,
   addQuantity,
   decreaseQuantity,
+  openCart,
 } = shopSlice.actions;

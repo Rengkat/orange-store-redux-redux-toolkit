@@ -24,7 +24,7 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const [total, setTotal] = useState(0);
-  const { cart } = useSelector((store) => store.cart);
+  const { cart, isOpen } = useSelector((store) => store.cart);
   const handleClear = () => {
     dispatch(clearCart());
   };
@@ -43,11 +43,12 @@ const Cart = () => {
       w={{ sm: "80%", md: "50%", lg: "30%" }}
       bg="white"
       position="absolute"
+      opacity={isOpen ? "1" : "0"}
       right={2}
       top="60%"
       border="1px grey solid"
       boxShadow="md"
-      zIndex={2}
+      zIndex={isOpen ? 2 : -2}
       //   display="none"
       rounded={7}>
       <Center my={5}>
