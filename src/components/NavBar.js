@@ -13,7 +13,13 @@ const NavBar = () => {
   };
   return (
     <Box bg="brand.100" overflow="hidden">
-      <Flex w="80%" h="20vh" mx="auto" justifyContent="space-between" align="center">
+      <Flex
+        w="80%"
+        h="20vh"
+        mx="auto"
+        justifyContent="space-between"
+        align="center"
+      >
         <Box>
           <Link to={"/"}>
             <Heading as="h1" size="2xl" color="white" fontFamily="Arial">
@@ -22,7 +28,12 @@ const NavBar = () => {
           </Link>
         </Box>
         <Box onClick={handleClick} position="relative" cursor="pointer">
-          <Icon fontSize={35} cursor="pointer" color="white" as={ShoppingBagIcon} />
+          <Icon
+            fontSize={35}
+            cursor="pointer"
+            color="white"
+            as={ShoppingBagIcon}
+          />
           <Flex
             w={8}
             h={8}
@@ -32,11 +43,12 @@ const NavBar = () => {
             right={-4}
             align="center"
             justify="center"
-            rounded="md">
+            rounded="md"
+          >
             <Text fontSize={20}>{cart.length}</Text>
           </Flex>
         </Box>
-        <Cart />
+        {/* <Cart /> */}
       </Flex>
     </Box>
   );
