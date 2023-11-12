@@ -1,7 +1,6 @@
 Sure, here's a README.md format for your "Orange Store" project:
 
-````markdown
-# Orange Store - Your One-Stop E-commerce Shop
+<h1> Orange Store - Your One-Stop E-commerce Shop </h1>
 
 ### Overview
 
@@ -30,7 +29,7 @@ Follow these steps to get started with the Orange Store project:
    git clone https://github.com/yourusername/orange-store.git
    cd orange-store
    ```
-````
+
 
 2. Install dependencies:
 
